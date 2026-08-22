@@ -1,0 +1,20 @@
+
+# Secrets
+.env
+.env.*
+
+# Entornos y cachés
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Renders intermedios (Manim/LaTeX); los finales están en assets/
+build/
+media/
+
+# Pesos locales de la ablación (publicados en W&B; 145 MB)
+outputs/
+
+# Borrador huérfano sin nombre de fichero
+docs/articulo/.md
