@@ -1,0 +1,30 @@
+[project]
+name = "minibeca"
+version = "0.1.0"
+description = "Replicación de Sparse Autoencoders de Anthropic con GPT-2"
+requires-python = ">=3.12"
+dependencies = [
+    # ML core (CPU-only)
+    "torch>=2.0",
+    "transformers>=4.40",
+    "datasets>=2.19",
+    "accelerate>=0.30",
+    # Analysis & visualization
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "tqdm>=4.66",
+    # Video
+    "manim>=0.18",
+    "sae-lens>=6.51",
+    "transformer-lens>=2.15",
+    "wandb>=0.30.0",
+    "huggingface-hub>=1.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "jupyter",
+]
