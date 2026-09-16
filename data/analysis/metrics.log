@@ -1,0 +1,17 @@
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:00<00:02,  1.72it/s]Fetching 5 files: 100%|██████████| 5/5 [00:03<00:00,  1.52it/s]Fetching 5 files: 100%|██████████| 5/5 [00:03<00:00,  1.53it/s]
+/usr/local/lib/python3.12/dist-packages/sae_lens/saes/sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+/workspace/minibeca_an/src/analyze_sae.py:90: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", device=device, **kwargs)
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 53/148 [00:00<00:00, 529.66it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 829.11it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+ours_topk_24k {"d_sae": 24576, "tokens": 65024, "explained_variance": 0.8501, "cossim": 0.958, "l0": 32.0, "l2_ratio": 0.9594, "frac_latents_fired": 0.9078, "ce_clean": 3.5938, "ce_sae": 3.7128, "ce_ablation": 11.1088, "ce_delta": 0.119, "ce_score": 0.9842, "kl_sae": 0.1496, "kl_ablation": 7.5695, "kl_score": 0.9802, "hook": "blocks.8.hook_resid_pre", "architecture": "topk", "model_kwargs": {}, "normalize_activations": "none", "seconds": 6.0}
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 3657.19it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+jbloom_res_jb {"d_sae": 24576, "tokens": 65024, "explained_variance": 0.8517, "cossim": 0.959, "l0": 66.9115, "l2_ratio": 0.9255, "frac_latents_fired": 0.9995, "ce_clean": 3.5938, "ce_sae": 3.7428, "ce_ablation": 11.1088, "ce_delta": 0.1491, "ce_score": 0.9802, "kl_sae": 0.1696, "kl_ablation": 7.5695, "kl_score": 0.9776, "hook": "blocks.8.hook_resid_pre", "architecture": "standard", "model_kwargs": {"center_writing_weights": true}, "normalize_activations": "none", "seconds": 5.6}
+openai_topk_32k {"d_sae": 32768, "tokens": 65024, "explained_variance": 0.8494, "cossim": 0.9578, "l0": 32.0, "l2_ratio": 0.9608, "frac_latents_fired": 0.9275, "ce_clean": 3.5938, "ce_sae": 3.7118, "ce_ablation": 11.1088, "ce_delta": 0.118, "ce_score": 0.9843, "kl_sae": 0.14, "kl_ablation": 7.5695, "kl_score": 0.9815, "hook": "blocks.7.hook_resid_post", "architecture": "topk", "model_kwargs": {}, "normalize_activations": "layer_norm", "seconds": 5.9}
+→ /workspace/minibeca_an/data/analysis/metrics_heldout.json
+METRICS_RC=0

@@ -1,0 +1,12 @@
+{
+  "ours": {
+    "never_fired": 808,
+    "alive_frac": 0.9671224355697632,
+    "tokens": 520192
+  },
+  "noauxk": {
+    "never_fired": 22355,
+    "alive_frac": 0.0903727263212204,
+    "tokens": 520192
+  }
+}
