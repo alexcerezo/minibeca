@@ -1,0 +1,64 @@
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 273.08it/s]
+/workspace/minibeca_an/src/analyze_sae.py:90: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", device=device, **kwargs)
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 3836.78it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+  64/4096 seqs  3s
+  3264/4096 seqs  111s
+{
+  "tokens": 520192,
+  "n_seqs": 4096,
+  "ctx": 128,
+  "latents_never_fired": 808,
+  "latents_density_gt_1e-2": 275,
+  "latents_density_lt_1e-5": 829,
+  "density_median_live": 0.00038639579232283466,
+  "w_dec_row_norm_mean": 1.0
+}
+geometry: {
+ "n_directions": 24576,
+ "d": 768,
+ "max_cos_decoder": {
+  "mean": 0.3569453954696655,
+  "std": 0.0929955542087555,
+  "q05": 0.21499821543693542,
+  "q25": 0.2942580580711365,
+  "median": 0.34879887104034424,
+  "q75": 0.4103183448314667,
+  "q95": 0.5226258039474487,
+  "max": 0.8851484656333923
+ },
+ "max_cos_random": {
+  "mean": 0.14620326459407806,
+  "std": 0.01031388621777296,
+  "q05": 0.1320088654756546,
+  "q25": 0.1388980746269226,
+  "median": 0.14477145671844482,
+  "q75": 0.1519176959991455,
+  "q95": 0.16503728926181793,
+  "max": 0.2093134969472885
+ },
+ "pair_cos_decoder": {
+  "mean": 0.009165965020656586,
+  "std": 0.042586296796798706,
+  "q05": -0.05588497966527939,
+  "q25": -0.0174168199300766,
+  "median": 0.007577911019325256,
+  "q75": 0.03355135768651962,
+  "q95": 0.07893545925617218,
+  "max": 0.6859598755836487
+ },
+ "pair_cos_random": {
+  "mean": -2.4868651962606236e-05,
+  "std": 0.036051031202077866,
+  "q05": -0.05935027077794075,
+  "q25": -0.024367958307266235,
+  "median": -4.159566015005112e-05,
+  "q75": 0.02429107204079628,
+  "q95": 0.059282079339027405,
+  "max": 0.174404576420784
+ },
+ "abs_pair_cos_decoder_mean": 0.03276512026786804,
+ "abs_pair_cos_random_mean": 0.028769683092832565
+}
+FEATURES_RC=0
