@@ -1,38 +1,46 @@
 ---
 layout: default
 title: Interpretando GPT-2 con un Sparse Autoencoder
-description: Entrenar un Sparse Autoencoder sobre gpt2-small y comprobar que sus latentes se corresponden con conceptos reconocibles, y que la red los usa causalmente para generar texto.
+description: Sparse Autoencoder TopK sobre gpt2-small; reconstrucción held-out, interpretabilidad ciega y steering causal.
 ---
 
 <script>
-window.MathJax = {
-  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-  svg: { fontCache: 'global' }
-};
+window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global' } };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-  video { max-width: 100%; height: auto; display: block; margin: 1.5rem auto; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-  figure { margin: 1.5rem 0; }
-  figcaption { font-size: 0.9em; color: #666; text-align: center; margin-top: 0.4rem; font-style: italic; }
-  table { display: block; overflow-x: auto; }
-  .lede { font-size: 1.1em; color: #444; border-left: 4px solid #159957; padding-left: 1rem; margin: 1.5rem 0; }
-  .meta { text-align: center; color: #666; margin-top: -0.5rem; margin-bottom: 2rem; }
-  .meta a { color: #159957; }
+  .page-header { background: #111; background-image: none; padding: 3rem 1rem; }
+  .project-name { font-weight: 600; }
+  .project-tagline { opacity: 0.85; }
+  .main-content { max-width: 68ch; font-size: 17px; line-height: 1.65; }
+  .main-content h1, .main-content h2, .main-content h3 { color: #111; border: none; margin-top: 2.5rem; }
+  .main-content h2 { font-size: 1.5em; }
+  .main-content h3 { font-size: 1.2em; }
+  .main-content a { color: #0b7285; }
+  .main-content code { background: #f4f4f4; padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.9em; }
+  .main-content pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+  .main-content pre code { background: transparent; color: inherit; padding: 0; }
+  .main-content blockquote { border-left: 3px solid #0b7285; color: #333; }
+  .main-content table { display: block; overflow-x: auto; font-size: 0.95em; }
+  .main-content th, .main-content td { padding: 0.4rem 0.7rem; border: 1px solid #e5e7eb; }
+  .main-content th { background: #f9fafb; }
+  video { max-width: 100%; height: auto; display: block; margin: 1.5rem auto; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); background: #000; }
+  figure { margin: 2rem 0; }
+  figcaption { font-size: 0.9em; color: #666; text-align: center; margin-top: 0.5rem; font-style: italic; }
+  .meta { margin: 0 0 1.5rem 0; color: #555; font-size: 0.95em; }
+  .meta a { margin-right: 1em; }
 </style>
 
 <p class="meta">
-  Alex Cerezo · <a href="https://github.com/alexcerezo/minibeca">repositorio</a> ·
-  <a href="https://huggingface.co/alexcerezo/sae-gpt2-small-l8-topk32">pesos</a> ·
-  <a href="https://wandb.ai/alexcerezocontreras-university-of-malaga/minibeca-xmihura">curvas</a>
+  <a href="https://github.com/alexcerezo/minibeca">Código</a>
+  <a href="https://huggingface.co/alexcerezo/sae-gpt2-small-l8-topk32">Pesos (HF)</a>
+  <a href="https://wandb.ai/alexcerezocontreras-university-of-malaga/minibeca-xmihura">Curvas (W&amp;B)</a>
 </p>
 
-<p class="lede">
 Cuando le preguntas a un modelo de lenguaje por qué ha escrito algo,
 responde con aún más texto generado y nada garantiza que esa respuesta
 describa lo que realmente produjo la salida.
-</p>
 
 La alternativa es inspeccionar ese cálculo directamente. A eso se dedica
 la **interpretabilidad mecanicista**, el estudio de los mecanismos
@@ -453,7 +461,6 @@ excluyen.**
 
 - **Código** (entrenamiento, análisis y animaciones):
   [github.com/alexcerezo/minibeca](https://github.com/alexcerezo/minibeca)
-  (se agradece una ⭐️)
 - **SAE entrenado**:
   [huggingface.co/alexcerezo/sae-gpt2-small-l8-topk32](https://huggingface.co/alexcerezo/sae-gpt2-small-l8-topk32)
 - **Curvas de entrenamiento**, con y sin AuxK:
@@ -469,20 +476,8 @@ z = sae.encode(x)  # activaciones de las 24 576 latentes para cada token
 
 ## Bibliografía
 
-1. N. Elhage et al., *Toy models of superposition*. Transformer Circuits
-   Thread, 2022. <https://transformer-circuits.pub/2022/toy_model/index.html>
-2. L. Gao et al., *Scaling and evaluating sparse autoencoders*. OpenAI,
-   2024. <https://cdn.openai.com/papers/sparse-autoencoders.pdf>
-3. T. Bricken et al., *Towards monosemanticity: Decomposing language
-   models with dictionary learning*. Transformer Circuits Thread, 2023.
-   <https://transformer-circuits.pub/2023/monosemantic-features/index.html>
-4. A. Templeton et al., *Scaling monosemanticity: Extracting
-   interpretable features from Claude 3 Sonnet*. Transformer Circuits
-   Thread, 2024. <https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html>
+1. N. Elhage et al., *Toy models of superposition*. Transformer Circuits Thread, 2022. <https://transformer-circuits.pub/2022/toy_model/index.html>
+2. L. Gao et al., *Scaling and evaluating sparse autoencoders*. OpenAI, 2024. <https://cdn.openai.com/papers/sparse-autoencoders.pdf>
+3. T. Bricken et al., *Towards monosemanticity: Decomposing language models with dictionary learning*. Transformer Circuits Thread, 2023. <https://transformer-circuits.pub/2023/monosemantic-features/index.html>
+4. A. Templeton et al., *Scaling monosemanticity: Extracting interpretable features from Claude 3 Sonnet*. Transformer Circuits Thread, 2024. <https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html>
 5. J. Bloom, *SAELens*. GitHub, 2024. <https://github.com/jbloomAus/SAELens>
-
----
-
-Este trabajo es resultado de las **Minibecas [@XMihura](https://x.com/XMihura)**.
-Gracias a @XMihura por apostar por el talento joven y por este proyecto
-en particular.
