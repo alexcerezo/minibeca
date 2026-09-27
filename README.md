@@ -1,7 +1,6 @@
-# Mini-Beca XMihura — Sparse Autoencoder sobre `gpt2-small`
+# Sparse Autoencoder sobre `gpt2-small`
 
-Entregable de la convocatoria **Minibecas XMihura**. Entrena un **Sparse
-Autoencoder TopK** (`k = 32`, `d_sae = 24 576`, expansión 32×) sobre
+Entrena un **Sparse Autoencoder TopK** (`k = 32`, `d_sae = 24 576`, expansión 32×) sobre
 `blocks.8.hook_resid_pre` de `gpt2-small`, con AuxK, checkpointing atómico y
 reanudación bit-exacta; después evalúa reconstrucción held-out,
 interpretabilidad ciega (LLM-as-judge) y control causal por *steering*.
