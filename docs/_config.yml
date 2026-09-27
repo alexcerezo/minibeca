@@ -1,0 +1,29 @@
+title: Interpretando GPT-2 con un Sparse Autoencoder
+description: >-
+  Entrenar un Sparse Autoencoder sobre gpt2-small y comprobar que sus
+  latentes se corresponden con conceptos reconocibles, y que la red los
+  usa causalmente para generar texto.
+author: Alex Cerezo
+lang: es
+
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+github:
+  repository_url: https://github.com/alexcerezo/minibeca
+
+# Excluir del build todo lo que no es la página
+exclude:
+  - articulo/
+  - papers/
+  - PLAN_TECNICO.md
+  - ESTADO.md
+  - README.md
+
+# Markdown + MathJax
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
